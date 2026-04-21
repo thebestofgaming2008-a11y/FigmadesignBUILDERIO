@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 
+// Correct Figma asset — calligraphy frame node 160-403
+const CALLIGRAPHY_SRC =
+  "https://www.figma.com/api/mcp/asset/a78b17ec-f5cf-4a30-a469-db78bc029a3e";
+
 function ArrowRightIcon() {
   return (
     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
@@ -56,78 +60,101 @@ const placeholderProducts = [
 export default function Index() {
   return (
     <main>
-      {/* Hero Section */}
+      {/* ── Hero Section ── */}
       <section className="bg-brand-bg relative overflow-hidden">
-        {/* Decorative background logos */}
+
+        {/*
+          ── Calligraphy background decorations ──
+          Two instances of the Hurayrah Essentials calligraphy mark (Figma node 160-403).
+          Positioned so they bleed off the left/right edges, behind all content.
+
+          Figma reference (436px canvas → rem, base 16px):
+            Left:  240px wide → 15rem, rotate -34.57°, center ≈ 1.5rem from left edge
+            Right: 184px wide → 11.5rem, rotate +37.13°, center ≈ right edge
+
+          clamp() scales proportionally at every breakpoint.
+          The parent `overflow-hidden` clips the parts that bleed off screen.
+        */}
         <div
-          className="absolute inset-0 overflow-hidden pointer-events-none"
+          className="absolute inset-0 overflow-hidden pointer-events-none z-0"
           aria-hidden
         >
+          {/* Left calligraphy mark */}
           <img
-            src="https://api.builder.io/api/v1/image/assets/TEMP/c3769c8d71c434536e5bdd13bcd3f22ab9659f3a?width=480"
+            src={CALLIGRAPHY_SRC}
             alt=""
-            className="absolute drop-shadow-md w-[200px] md:w-[260px] lg:w-[300px]"
             style={{
-              transform: "rotate(-34.567deg)",
-              left: "-60px",
-              top: "10px",
+              position: "absolute",
+              width: "clamp(8rem, 38vw, 15rem)",
+              transform: "rotate(-34.57deg)",
+              left: "clamp(-6rem, -12vw, -3rem)",
+              top: "0.625rem",
+              filter: "drop-shadow(0 0.25rem 0.25rem rgba(0,0,0,0.25))",
             }}
           />
+
+          {/* Right calligraphy mark */}
           <img
-            src="https://api.builder.io/api/v1/image/assets/TEMP/3c78276e6e8098e15efb985fffbc5a17f928bebe?width=367"
+            src={CALLIGRAPHY_SRC}
             alt=""
-            className="absolute drop-shadow-md w-[160px] md:w-[200px] lg:w-[240px]"
             style={{
-              transform: "rotate(37.125deg)",
-              right: "-30px",
-              top: "10px",
+              position: "absolute",
+              width: "clamp(6rem, 29vw, 11.5rem)",
+              transform: "rotate(37.13deg)",
+              right: "clamp(-4rem, -8vw, -1.5rem)",
+              top: "0.625rem",
+              filter: "drop-shadow(0 0.25rem 0.25rem rgba(0,0,0,0.25))",
             }}
           />
         </div>
 
-        {/* Hero Content */}
+        {/* ── Hero Content ── */}
         <div className="relative z-10 flex flex-col items-center text-center px-6 pt-10 pb-14 md:pt-16 md:pb-20 max-w-screen-xl mx-auto">
-          {/* Headline */}
-          <h1 className="font-philosopher font-bold italic text-[30px] md:text-[40px] lg:text-[50px] text-black tracking-[-0.6px] leading-[168%]">
+
+          {/* Headline — 30px → 1.875rem */}
+          <h1 className="font-philosopher font-bold italic text-[1.875rem] md:text-[2.5rem] lg:text-[3.125rem] text-black tracking-[-0.0375rem] leading-[168%]">
             SEEK KNOWLEDGE
           </h1>
 
-          {/* Sub-headline */}
-          <h2 className="font-philosopher font-normal text-[45px] md:text-[60px] lg:text-[72px] text-[#000D37] leading-[168%] -mt-6 md:-mt-8">
+          {/* Sub-headline — 45px → 2.8125rem */}
+          <h2 className="font-philosopher font-normal text-[2.8125rem] md:text-[3.75rem] lg:text-[4.5rem] text-[#000D37] leading-[168%] -mt-6 md:-mt-8">
             AFFORDABLY.
           </h2>
 
-          {/* Tagline */}
-          <p className="font-philosopher text-[14px] text-black/60 tracking-[-0.84px] leading-[95%] -mt-3">
+          {/* Tagline — 14px → 0.875rem */}
+          <p className="font-philosopher text-[0.875rem] text-black/60 tracking-[-0.0525rem] leading-[95%] -mt-3">
             Seeking knowledge made easy.
           </p>
 
           {/* Guarantees */}
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 mt-3">
-            <span className="font-philosopher text-[14px] text-black/50 tracking-[-0.84px] leading-[95%]">
-              Authentic titles
-            </span>
-            <span className="font-philosopher text-[14px] text-black/50 tracking-[-0.84px] leading-[95%]">
-              International shipping
-            </span>
-            <span className="font-philosopher text-[14px] text-black/50 tracking-[-0.84px] leading-[95%]">
-              Secure checkout
-            </span>
+            {["Authentic titles", "International shipping", "Secure checkout"].map(
+              (guarantee) => (
+                <span
+                  key={guarantee}
+                  className="font-philosopher text-[0.875rem] text-black/50 tracking-[-0.0525rem] leading-[95%]"
+                >
+                  {guarantee}
+                </span>
+              )
+            )}
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col items-center gap-0 mt-6 w-full max-w-[268px]">
+          {/* CTA Buttons — max-w 268px → 16.75rem */}
+          <div className="flex flex-col items-center gap-0 mt-6 w-full max-w-[16.75rem]">
+            {/* Primary — py 5px → 0.3125rem, rounded 3px → 0.1875rem */}
             <Link
               to="/products"
-              className="w-full flex items-center justify-center gap-[5px] bg-brand-dark text-white font-philosopher font-bold text-[18px] tracking-[-0.54px] leading-[153%] py-[5px] px-6 rounded-[3px] hover:bg-brand-dark/90 transition-colors"
+              className="w-full flex items-center justify-center gap-[0.3125rem] bg-brand-dark text-white font-philosopher font-bold text-[1.125rem] tracking-[-0.03375rem] leading-[153%] py-[0.3125rem] px-6 rounded-[0.1875rem] hover:bg-brand-dark/90 transition-colors"
             >
               Browse products
               <ArrowRightIcon />
             </Link>
 
+            {/* Secondary — 18px → 1.125rem, py 4px → 0.25rem */}
             <Link
               to="/products"
-              className="font-philosopher font-bold text-[18px] text-brand-dark tracking-[-0.54px] leading-[153%] py-[4px] hover:opacity-70 transition-opacity"
+              className="font-philosopher font-bold text-[1.125rem] text-brand-dark tracking-[-0.03375rem] leading-[153%] py-[0.25rem] hover:opacity-70 transition-opacity"
             >
               Check out categories
             </Link>
@@ -135,29 +162,32 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Featured Items Section */}
+      {/* ── Featured Items Section ── */}
       <section className="bg-white px-6 pt-6 pb-10 md:px-10 lg:px-16">
         <div className="max-w-screen-xl mx-auto">
+
           {/* Section Header */}
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-philosopher font-normal text-[18px] text-black tracking-[-0.54px] leading-[153%]">
+            {/* 18px → 1.125rem, tracking -0.54px → -0.03375rem */}
+            <h3 className="font-philosopher font-normal text-[1.125rem] text-black tracking-[-0.03375rem] leading-[153%]">
               Featured Items
             </h3>
+            {/* 10px → 0.625rem, tracking -0.3px → -0.01875rem */}
             <Link
               to="/products"
-              className="flex items-center font-philosopher text-[10px] text-black tracking-[-0.3px] leading-[153%] hover:opacity-70 transition-opacity"
+              className="flex items-center font-philosopher text-[0.625rem] text-black tracking-[-0.01875rem] leading-[153%] hover:opacity-70 transition-opacity"
             >
               View all
               <ViewAllArrow />
             </Link>
           </div>
 
-          {/* Product Cards Grid */}
+          {/* Product Cards — rounded 7px → 0.4375rem */}
           <div className="grid grid-cols-3 gap-3 md:gap-4 lg:gap-6 md:grid-cols-4 lg:grid-cols-5">
             {placeholderProducts.map((product) => (
               <div
                 key={product.id}
-                className="bg-[#D9D9D9] rounded-[7px] aspect-[101/150] md:aspect-[2/3] hover:opacity-80 transition-opacity cursor-pointer"
+                className="bg-[#D9D9D9] rounded-[0.4375rem] aspect-[101/150] md:aspect-[2/3] hover:opacity-80 transition-opacity cursor-pointer"
               />
             ))}
           </div>

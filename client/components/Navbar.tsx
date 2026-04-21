@@ -56,13 +56,13 @@ export default function Navbar() {
 
   return (
     <header className="w-full sticky top-0 z-50">
-      {/* Notice Bar */}
-      <div className="bg-brand-bg shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] relative flex items-center justify-center min-h-[21px] px-4">
-        <p className="font-philosopher text-xs text-center text-black leading-[168%]">
+      {/* ── Notice Bar — min-h 21px → 1.3125rem ── */}
+      <div className="bg-brand-bg shadow-[0_0.25rem_0.25rem_0_rgba(0,0,0,0.25)] relative flex items-center justify-center min-h-[1.3125rem] px-4">
+        <p className="font-philosopher text-[0.75rem] text-center text-black leading-[168%]">
           International orders may incur customs/import duties
         </p>
         <div className="absolute right-3 top-0 h-full flex items-center gap-1">
-          <svg width="5" height="11" viewBox="0 0 5 11" fill="none" aria-hidden>
+          <svg width="0.3125rem" height="0.6875rem" viewBox="0 0 5 11" fill="none" aria-hidden>
             <g clipPath="url(#arrow-clip)">
               <path
                 d="M3.54159 4.58333L2.49992 6.875L1.45825 4.58333H3.54159Z"
@@ -80,30 +80,30 @@ export default function Navbar() {
               </clipPath>
             </defs>
           </svg>
-          <span className="font-philosopher text-xs text-black">INR</span>
-          <span className="font-philosopher text-xs text-black">₹</span>
+          <span className="font-philosopher text-[0.75rem] text-black">INR</span>
+          <span className="font-philosopher text-[0.75rem] text-black">₹</span>
         </div>
       </div>
 
-      {/* Main Header Row */}
+      {/* ── Main Header Row ── */}
       <div className="bg-brand-header border border-black/[0.17]">
         <div className="flex items-center gap-2 px-3 py-2 max-w-screen-xl mx-auto">
-          {/* Logo */}
+          {/* Logo — h 52px → 3.25rem */}
           <Link to="/" className="flex-shrink-0">
             <img
               src="https://api.builder.io/api/v1/image/assets/TEMP/2f0e718599e645a7d577e6037bd1b30fc84324d7?width=150"
               alt="Hurayrah Essentials"
-              className="h-[52px] w-auto"
+              className="h-[3.25rem] w-auto"
             />
           </Link>
 
-          {/* Search Bar */}
-          <div className="flex-1 flex items-center gap-[5px] bg-[#D9D9D9] border border-[rgba(154,154,154,0.30)] rounded-xl px-1.5 py-0.5 mx-1 md:mx-4 max-w-xs md:max-w-sm">
+          {/* Search Bar — gap 5px → 0.3125rem, px 6px → 0.375rem, py 2px → 0.125rem */}
+          <div className="flex-1 flex items-center gap-[0.3125rem] bg-[#D9D9D9] border border-[rgba(154,154,154,0.30)] rounded-xl px-1.5 py-0.5 mx-1 md:mx-4 max-w-xs md:max-w-sm">
             <SearchIcon />
             <input
               type="text"
               placeholder="Imam Ahmad, Mutoon, etc"
-              className="bg-transparent text-[9px] md:text-xs font-philosopher text-[#4E5159] flex-1 outline-none placeholder:text-[#4E5159] min-w-0"
+              className="bg-transparent text-[0.5625rem] md:text-[0.75rem] font-philosopher text-[#4E5159] flex-1 outline-none placeholder:text-[#4E5159] min-w-0"
             />
           </div>
 
@@ -124,8 +124,8 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Nav Links */}
-        <div className="bg-white/60 backdrop-blur-sm shadow-[0_8px_40px_0_rgba(0,0,0,0.20)]">
+        {/* ── Nav Links ── */}
+        <div className="bg-white/60 backdrop-blur-sm shadow-[0_0.5rem_2.5rem_0_rgba(0,0,0,0.20)]">
           <nav className="flex items-center justify-center gap-4 md:gap-5 py-1.5 overflow-x-auto max-w-screen-xl mx-auto px-4">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.href;
@@ -134,8 +134,10 @@ export default function Navbar() {
                   key={link.href}
                   to={link.href}
                   className={cn(
-                    "font-philosopher text-[15px] whitespace-nowrap pb-0.5 relative transition-colors",
-                    isActive ? "text-brand-dark" : "text-black hover:text-brand-dark/70"
+                    "font-philosopher text-[0.9375rem] whitespace-nowrap pb-0.5 relative transition-colors",
+                    isActive
+                      ? "text-brand-dark"
+                      : "text-black hover:text-brand-dark/70"
                   )}
                 >
                   {link.label}
