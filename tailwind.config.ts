@@ -13,7 +13,13 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        philosopher: ["Philosopher", "serif"],
+      },
       colors: {
+        "brand-dark": "hsl(var(--brand-dark))",
+        "brand-bg": "hsl(var(--brand-bg))",
+        "brand-header": "hsl(var(--brand-header))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
